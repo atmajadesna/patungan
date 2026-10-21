@@ -1,0 +1,56 @@
+/* Hallmark · tokens · theme: Coral · macrostructure: Stat-Led
+ * tone: utilitarian-warm · anchor hue: coral 32
+ */
+:root {
+  /* paper band: light, warm */
+  --color-paper: oklch(98.5% 0.008 60);
+  --color-paper-2: oklch(96% 0.012 55);
+  --color-paper-3: oklch(93% 0.016 55);
+  --color-ink: oklch(24% 0.022 40);
+  --color-ink-soft: oklch(38% 0.02 40);
+  --color-muted: oklch(52% 0.018 45);
+  --color-accent: oklch(62% 0.17 32);
+  --color-accent-strong: oklch(54% 0.18 30);
+  --color-accent-ink: oklch(99% 0.006 60);
+  --color-accent-soft: oklch(94% 0.035 35);
+  --color-ok: oklch(50% 0.11 150);
+  --color-danger: oklch(55% 0.17 25);
+  --color-rule: oklch(88% 0.014 50);
+  --color-focus: oklch(52% 0.19 32);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.6rem;
+  --text-2xl: 2.1rem;
+  --text-3xl: 3rem;
+  --text-display: clamp(3.4rem, 12vw, 7rem);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --rule-hair: 1px solid var(--color-rule);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-mid: 220ms;
+  --dur-slow: 380ms;
+}

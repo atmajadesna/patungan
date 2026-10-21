@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patungan — bagi tagihan sampai rupiah terakhir</title>
+<meta name="description" content="Bagi tagihan makan bersama sesuai pesanan masing-masing. Pajak dan service dihitung proporsional, pembulatan dibagi supaya tidak ada selisih.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+
+  <header class="top">
+    <div class="brand">patungan<span>.</span></div>
+    <p class="top__note">Bagi tagihan sampai rupiah terakhir.</p>
+  </header>
+
+  <!-- ============ HERO (Stat-Led) ============ -->
+  <section class="hero">
+    <p class="hero__label" id="hero-label">Rata-rata per orang</p>
+    <p class="hero__value" id="hero-value">Rp 0</p>
+    <p class="hero__sub" id="hero-sub">Isi tagihan di bawah. Angka di atas langsung ikut berubah.</p>
+    <div class="hero__stats">
+      <div class="stat">
+        <p class="stat__k">Terkumpul</p>
+        <p class="stat__v" id="stat-tagihan">Rp 0</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">Orang</p>
+        <p class="stat__v" id="stat-orang">0</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">Pajak + service</p>
+        <p class="stat__v" id="stat-pajak">0%</p>
+      </div>
+      <div class="stat">
+        <p class="stat__k">Rata-rata</p>
+        <p class="stat__v" id="stat-rata">Rp 0</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <!-- ---------- kiri: input ---------- -->
+    <section class="card">
+      <div class="card__head">
+        <h2>Tagihan</h2>
+        <div class="seg" role="group" aria-label="Cara membagi">
+          <button type="button" id="mode-rata" aria-pressed="false">Bagi rata</button>
+          <button type="button" id="mode-item" aria-pressed="true">Sesuai pesanan</button>
+        </div>
+      </div>
+
+      <!-- mode: bagi rata -->
+      <div id="panel-rata" hidden>
+        <div class="field">
+          <label for="total-rata">Total di struk</label>
+          <input id="total-rata" type="text" inputmode="numeric" value="285.000" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- mode: sesuai pesanan -->
+      <div id="panel-item">
+        <div class="field">
+          <label>Item pesanan</label>
+          <p class="petunjuk">Klik nama di bawah tiap item untuk menentukan siapa yang ikut menanggungnya.</p>
+          <div class="items" id="items"></div>
+        </div>
+        <button type="button" class="btn btn--garis btn--lebar" id="tambah-item">Tambah item</button>
+
+        <div class="row2" style="margin-top: var(--space-4)">
+          <div class="field">
+            <label for="pajak">Pajak (%)</label>
+            <input id="pajak" type="number" min="0" max="50" step="0.1" value="10" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="service">Service (%)</label>
+            <input id="service" type="number" min="0" max="50" step="0.1" value="5" inputmode="decimal">
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top: var(--space-4)">
+        <label for="step">Bulatkan ke</label>
+        <select id="step">
+          <option value="1">Rupiah pas</option>
+          <option value="100">Rp 100 terdekat ke atas</option>
+          <option value="500" selected>Rp 500 terdekat ke atas</option>
+          <option value="1000">Rp 1.000 terdekat ke atas</option>
+        </select>
+      </div>
+
+      <div class="field" style="margin-top: var(--space-4)">
+        <label>Orang</label>
+        <div class="people" id="people"></div>
+        <div class="tambah">
+          <input id="nama-baru" type="text" placeholder="Tambah nama" aria-label="Nama orang baru">
+          <button type="button" id="tambah-orang">Tambah</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- kanan: hasil ---------- -->
+    <section class="card card--tint card--lekat">
+      <div class="card__head">
+        <h2>Yang harus dibayar</h2>
+        <span id="hasil-catatan"></span>
+      </div>
+      <ul class="hasil" id="hasil"></ul>
+      <p class="note" id="note" hidden></p>
+    </section>
+
+  </div>
+
+  <section class="langkah-tiga">
+    <div>
+      <p class="langkah-tiga__num">01</p>
+      <p class="langkah-tiga__judul">Bagi per item</p>
+      <p class="langkah-tiga__isi">Harga tiap pesanan dibagi ke orang yang ikut menanggungnya, bukan dibagi rata ke semua.</p>
+    </div>
+    <div>
+      <p class="langkah-tiga__num">02</p>
+      <p class="langkah-tiga__judul">Pajak proporsional</p>
+      <p class="langkah-tiga__isi">Pajak dan service ikut porsi masing-masing, jadi yang pesan lebih banyak ikut menanggung lebih besar.</p>
+    </div>
+    <div>
+      <p class="langkah-tiga__num">03</p>
+      <p class="langkah-tiga__judul">Sisa dibagi habis</p>
+      <p class="langkah-tiga__isi">Setelah dibulatkan, sisa dibagikan ke bagian terbesar. Jumlah semua orang selalu sama dengan total.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Semua perhitungan berjalan di perangkat ini. Tidak ada data yang dikirim.</span>
+    <span>Pembulatan dibagi ke yang sisa terbesar, jadi jumlahnya selalu pas.</span>
+  </footer>
+
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
