@@ -2,7 +2,7 @@
 
 # Patungan
 
-**Bagi tagihan makan sesuai pesanan — pajak proporsional, pembulatan tanpa selisih.**
+**Pembagian tagihan sesuai pesanan — pajak proporsional dan pembulatan tanpa selisih.**
 
 [![Demo](https://img.shields.io/badge/demo-live-b45309?style=flat-square)](https://atmajadesna.github.io/patungan/)
 ![Tanpa build step](https://img.shields.io/badge/build-tanpa%20build%20step-2f6f4f?style=flat-square)
@@ -12,37 +12,39 @@
 
 </div>
 
-## Masalahnya
+## Latar Belakang
 
-Bagi tagihan rata per orang itu gampang, tapi tidak adil kalau yang pesan nasi goreng Rp45.000 ikut menanggung pajak sama besar dengan yang cuma pesan es teh.
+Membagi tagihan secara rata mudah dilakukan, tetapi menjadi tidak adil apabila peserta yang hanya memesan minuman menanggung pajak sebesar peserta yang memesan makanan utama.
 
-## Yang menarik di dalamnya
+## Poin Teknis
 
-**Pajak proporsional** — Tiap orang menanggung pajak dan service sebesar porsi pesanannya, bukan dibagi rata.
-**Largest remainder** — Sisa pembulatan dibagi ke yang sisa desimalnya terbesar, sehingga jumlah semua bagian persis sama dengan total tagihan — nol selisih.
-**Pembulatan bisa diatur** — Kelipatan Rp1, Rp100, Rp500, atau Rp1.000 sesuai kebiasaan transfer.
+**Pajak proporsional.** Setiap peserta menanggung pajak dan biaya layanan sebesar porsi pesanannya, bukan dibagi secara merata.
 
-## Jalanin
+**Metode largest remainder.** Sisa pembulatan dialokasikan kepada peserta dengan nilai desimal terbesar, sehingga jumlah seluruh bagian tepat sama dengan total tagihan — tanpa selisih.
 
-Buka `index.html` di browser.
+**Kelipatan pembulatan dapat diatur.** Tersedia pilihan Rp1, Rp100, Rp500, dan Rp1.000 sesuai kebiasaan transfer.
+
+## Menjalankan
+
+Berkas `index.html` dapat dibuka langsung pada peramban:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Tidak ada dependency, tidak ada build step. Semua jalan di browser.
+Tidak diperlukan dependensi maupun proses build. Seluruh proses berjalan pada peramban.
 
-## Struktur
+## Struktur Berkas
 
 ```
-index.html    tampilan dan struktur halaman
-app.js        seluruh logika: data, hitungan, penyimpanan
-styles.css    tata letak dan komponen
+index.html    struktur halaman dan tampilan
+app.js        seluruh logika: data, perhitungan, dan penyimpanan
+styles.css    tata letak dan komponen antarmuka
 tokens.css    warna, ukuran teks, dan spasi sebagai variabel
 ```
 
 ## Catatan
 
-Contoh: tagihan Rp128.800 → terkumpul Rp129.000 → 30.500 / 30.500 / 68.000, pas tanpa selisih.
+Contoh: tagihan Rp128.800 menghasilkan total terkumpul Rp129.000 dengan pembagian 30.500 / 30.500 / 68.000, tepat tanpa selisih.
 
-Dibuat dengan JavaScript, HTML, CSS, tanpa framework.
+Dibangun menggunakan JavaScript, HTML, dan CSS, tanpa kerangka kerja.
